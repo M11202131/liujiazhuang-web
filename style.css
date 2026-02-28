@@ -922,3 +922,98 @@ details > summary::-webkit-details-marker {
 .shadow-left {
     box-shadow: -15px 15px 0px rgba(194, 168, 120, 0.2); /* 換成淡淡的金色錯位 */
 }
+
+
+
+/* =========================================
+   手機版響應式設計 (RWD 魔法)
+   當螢幕寬度小於 768px (一般手機與直立平板) 時啟動
+========================================= */
+@media (max-width: 768px) {
+    
+    /* 1. 調整全域間距與字體大小 */
+    .section-pad {
+        padding: 60px 0; /* 手機版不需要那麼大的上下留白 */
+    }
+    .container {
+        width: 90%;
+    }
+    .oriental-title {
+        font-size: 2rem; /* 標題稍微縮小 */
+    }
+
+    /* 2. 導覽列改為垂直堆疊與置中 */
+    header {
+        padding: 10px 0;
+    }
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+    nav ul {
+        flex-wrap: wrap; /* 允許選單自動折行 */
+        justify-content: center;
+        gap: 15px 20px;
+    }
+
+    /* 3. 首頁大圖與直式文字微調 */
+    .hero-brand {
+        margin-top: 130px; /* 避開變高的導覽列 */
+        height: calc(100vh - 130px);
+    }
+    .hero-brand .hero-content {
+        right: 5%; /* 往中間靠一點 */
+    }
+    .hero-brand .vertical-text.main {
+        font-size: 2.2rem; /* 縮小文字避免超出螢幕 */
+        letter-spacing: 10px;
+    }
+    .hero-brand .vertical-text.sub {
+        font-size: 1.2rem;
+        letter-spacing: 5px;
+        margin-top: 30px;
+    }
+
+    /* 4. 取消所有「左右並排」，強制改為「上下堆疊」 */
+    .split-grid, 
+    .intro-section, 
+    .about-story-grid,
+    .traffic-grid,
+    .contact-grid {
+        flex-direction: column !important; /* 強制改為垂直排列 */
+        gap: 40px;
+    }
+
+    /* 歸零原本用來做左右間距的 padding */
+    .pl-50, .pr-50 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    /* 5. 美味菜單：三欄式網格改為單欄 */
+    .signature-grid {
+        grid-template-columns: 1fr; /* 1 Column */
+        gap: 30px;
+    }
+    .full-menu-grid {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    /* 6. 交通資訊地圖解除黏貼效果 (避免手機滑動異常) */
+    .traffic-map-col {
+        position: relative; 
+        top: 0;
+        width: 100%;
+    }
+
+    /* 7. 最新消息排版微調 */
+    .news-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 0;
+    }
+    .news-date {
+        margin-bottom: 8px;
+    }
+}
