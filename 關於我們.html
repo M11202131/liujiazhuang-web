@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>關於我們 | 劉家莊燜雞</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="images/logo2.jpg" alt="劉家莊燜雞 Logo">
+            </a>
+            <ul>
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="關於我們.html" class="active">關於我們</a></li>
+                <li><a href="美味菜單.html">美味菜單</a></li>
+                <li><a href="常見問題.html">常見問題</a></li>
+                <li><a href="交通.html">交通資訊</a></li>
+                <li><a href="聯絡我們.html">聯絡我們</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="sub-hero" style="background-image: url('images/ref1.jpg');">
+        <div class="sub-hero-content">
+            <h1 class="oriental-title" style="color: #FFF; border-bottom-color: transparent;">關於劉家莊</h1>
+            <p>歲月慢熬，二十年不變的在地溫暖</p>
+        </div>
+    </section>
+
+    <section class="section-pad">
+        <div class="container about-story-grid">
+            <div class="about-story-text">
+                <h2 class="oriental-title">尋味九芎湖<br>傳承二十載</h2>
+                <div class="text-content">
+                    <p>隱身於新竹九芎湖的青山綠水間，「劉家莊燜雞」點燃灶火，至今已走過二十多個年頭。我們深信，最好的味道來自對土地的敬意與時間的淬鍊。</p>
+                    <p>因此，我們嚴選在地新鮮食材，依循客家先民的古法燜製手藝，將醇厚的傳統客家風味完美封存。從最初端上桌的那一盤金黃酥脆的燜雞，到無數個家庭在此舉杯歡聚的時刻，我們所傳遞的，早已超越了舌尖上的美味，而是一份猶如回到家鄉般的溫暖悸動。</p>
+                </div>
+            </div>
+            <div class="about-story-img">
+                <img src="images/ref.jpg" alt="古法燜製">
+            </div>
+        </div>
+    </section>
+
+    <section class="philosophy-section">
+        <div class="container text-center">
+            <h2 class="stamp-title">以食會友 ‧ 以情入味</h2>
+            <p class="philosophy-quote">
+                「我們相信，美食從來都不只是味蕾的短暫享受，更是人與人之間最真摯的情感交流。<br>
+                劉家莊希望帶給您的，不只是舌尖上的回味，更是每一次相聚時，滿溢的溫暖與珍貴回憶。」
+            </p>
+        </div>
+    </section>
+
+    <section class="section-pad bg-paper-dark">
+        <div class="container">
+            <h2 class="oriental-title text-center" style="display: block; margin-bottom: 60px;">秘境風光<span class="stamp">環境</span></h2>
+            
+            <div class="carousel-container">
+                <div class="carousel-slide" id="carouselSlide">
+                    <img src="images/about1.jpg" alt="餐廳環境 1">
+                    <img src="images/about2.jpg" alt="餐廳環境 2">
+                    <img src="images/about3.jpg" alt="餐廳環境 3">
+                </div>
+                <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
+                <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>新竹縣新埔鎮照門里九芎湖16-2號 ｜ 訂位專線：03-5890709</p>
+            <p style="font-size: 0.9rem; margin-top: 30px; opacity: 0.5;">© 2026 劉家莊燜雞 All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        function moveSlide(direction) {
+            const slides = document.querySelectorAll('#carouselSlide img');
+            const totalSlides = slides.length;
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            const slideWidth = document.querySelector('.carousel-container').clientWidth;
+            document.getElementById('carouselSlide').style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+        }
+    </script>
+
+</body>
+</html>

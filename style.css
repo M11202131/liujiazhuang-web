@@ -1,0 +1,924 @@
+/* ===== 全域美學與重置 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --paper-white: #F7F5F0;   /* 宣紙米白 */
+    --ink-black: #2A2A2A;     /* 墨黑 */
+    --stamp-red: #B71C1C;     /* 印章紅 */
+    --gold-accent: #C2A878;   /* 內斂暗金 */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Noto Serif TC', "PMingLiU", serif;
+    background-color: var(--paper-white);
+    color: var(--ink-black);
+    line-height: 1.8;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ===== 東方美學元件 ===== */
+.oriental-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 5px;
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+}
+
+.oriental-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background-color: var(--stamp-red);
+}
+
+.stamp {
+    display: inline-block;
+    color: var(--stamp-red);
+    border: 2px solid var(--stamp-red);
+    padding: 2px 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-left: 15px;
+    border-radius: 3px;
+    transform: rotate(-3deg);
+    vertical-align: super;
+}
+
+/* ===== 導覽列 ===== */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(247, 245, 240, 0.95);
+    border-bottom: 1px solid var(--gold-accent);
+    z-index: 1000;
+    padding: 10px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+
+nav {
+    width: 90%;
+    max-width: 1400px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 65px;
+    vertical-align: middle;
+    /* 加入下面這行去背魔法 */
+    mix-blend-mode: multiply; 
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 35px;
+}
+
+nav a {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--ink-black);
+}
+
+nav a:hover, nav a.active {
+    color: var(--stamp-red);
+}
+
+/* 第一區塊：品牌主視覺 (保留暗色遮罩與白字，僅修正遮擋與裁切) */
+.hero-brand {
+    /* 1. 解決導覽列遮擋：往下推 85px，並扣除高度，讓它不會鑽到導覽列下面 */
+    margin-top: 85px; 
+    height: calc(100vh - 85px); 
+    
+    /* 2. 解決裁切問題：使用 contain 讓 Logo 完整顯示不被切掉，並設定底色為白融合邊界 */
+    background-image: url('images/logo.jpg');
+    background-size: contain; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #FFFFFF; /* 白色底，等等會被下面的暗色 overlay 統一覆蓋變暗 */
+    position: relative;
+}
+
+/* 完美保留你喜歡的暗色漸層遮罩 */
+.hero-brand .hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(42, 42, 42, 0.4), rgba(42, 42, 42, 0.6));
+    z-index: 1;
+}
+
+/* 完美保留原本的直式白字與排版位置 */
+.hero-brand .hero-content {
+    position: absolute;
+    right: 12%; 
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 20px;
+}
+
+.hero-brand .vertical-text {
+    writing-mode: vertical-rl;
+    color: #FFF;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+}
+
+.hero-brand .vertical-text.main {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 15px;
+    border-left: 3px solid var(--stamp-red);
+    padding-left: 20px;
+}
+
+.hero-brand .vertical-text.sub {
+    font-size: 1.8rem;
+    letter-spacing: 8px;
+    color: #E0E0E0;
+    margin-top: 50px;
+}
+
+/* ===== 區塊間距與按鈕 ===== */
+.section-pad {
+    padding: 120px 0;
+}
+
+.btn-outline {
+    display: inline-block;
+    padding: 12px 35px;
+    border: 1px solid var(--ink-black);
+    color: var(--ink-black);
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    margin-top: 30px;
+}
+
+.btn-outline:hover {
+    background-color: var(--stamp-red);
+    border-color: var(--stamp-red);
+    color: #FFF;
+}
+
+/* ===== 首頁引言區 ===== */
+.intro-section {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.intro-text {
+    flex: 1;
+}
+
+.intro-text p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.intro-image {
+    flex: 1;
+    position: relative;
+}
+
+.intro-image img {
+    width: 100%;
+    filter: sepia(30%);
+    box-shadow: 15px 15px 0px rgba(0,0,0,0.05);
+}
+
+/* ===== 頁尾 ===== */
+footer {
+    background-color: var(--ink-black);
+    color: var(--paper-white);
+    text-align: center;
+    padding: 60px 20px 30px;
+    border-top: 5px solid var(--stamp-red);
+}
+
+footer p {
+    margin-bottom: 10px;
+    opacity: 0.8;
+    letter-spacing: 1px;
+}
+
+
+
+/* =========================================
+   「關於我們」專屬樣式
+========================================= */
+
+/* 次級主視覺 (比較矮的 Banner) */
+.sub-hero {
+    height: 45vh; /* 高度佔螢幕的 45% */
+    background-size: cover;
+    background-position: center 30%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 85px; /* 避開固定導覽列的高度 */
+}
+
+.sub-hero::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6); /* 黑色半透明遮罩 */
+    z-index: 1;
+}
+
+.sub-hero-content {
+    position: relative;
+    z-index: 2;
+    color: #FFF;
+}
+
+.sub-hero-content p {
+    font-size: 1.3rem;
+    letter-spacing: 5px;
+    margin-top: -10px;
+    opacity: 0.9;
+}
+
+/* 品牌故事排版 */
+.about-story-grid {
+    display: flex;
+    gap: 80px;
+    align-items: center;
+}
+
+.about-story-text {
+    flex: 1;
+}
+
+.about-story-text .text-content p {
+    font-size: 1.15rem;
+    color: #444;
+    margin-bottom: 25px;
+    text-align: justify; /* 讓段落左右對齊更整齊 */
+}
+
+.about-story-img {
+    flex: 1;
+}
+
+.about-story-img img {
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: -15px 15px 0px rgba(183, 28, 28, 0.05); /* 紅色系錯位陰影，增加設計感 */
+}
+
+/* 經營理念 (引言設計) */
+.philosophy-section {
+    padding: 100px 0;
+    background-image: url('images/hero-chicken.jpg'); /* 利用滿版大圖做背景 */
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: #FFF;
+}
+
+.philosophy-section::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(42, 42, 42, 0.85); /* 深色遮罩讓文字清楚 */
+    z-index: 1;
+}
+
+.philosophy-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.stamp-title {
+    font-size: 2rem;
+    color: var(--stamp-red);
+    margin-bottom: 30px;
+    letter-spacing: 8px;
+}
+
+.philosophy-quote {
+    font-size: 1.4rem;
+    line-height: 2.2;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.bg-paper-dark {
+    background-color: #EFECE3; /* 比宣紙更深一點的底色，區隔區塊 */
+}
+
+/* 幻燈片 (Carousel) 樣式 */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px; /* 限制最大寬度讓圖片不至於太大 */
+    margin: 0 auto;
+    overflow: hidden; /* 隱藏超出範圍的圖片 */
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.carousel-slide {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* 滑動的動畫效果 */
+}
+
+.carousel-slide img {
+    width: 100%; /* 每一張圖都與容器等寬 */
+    flex-shrink: 0; /* 確保圖片不會被擠壓 */
+    object-fit: cover;
+    aspect-ratio: 16/9; /* 強制圖片維持 16:9 比例，避免跳動 */
+}
+
+/* 左右按鈕 */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.carousel-btn:hover {
+    background-color: var(--stamp-red);
+}
+
+.carousel-btn.prev { left: 0; border-radius: 0 4px 4px 0; }
+.carousel-btn.next { right: 0; border-radius: 4px 0 0 4px; }
+
+
+
+
+/* =========================================
+   「美味菜單」專屬樣式
+========================================= */
+
+/* 招牌美饌圖鑑 (Grid 排版) */
+.signature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 切成三個等寬欄位 */
+    gap: 40px;
+}
+
+.signature-card {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid var(--gold-accent); /* 內斂的金色邊框 */
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.signature-card:hover {
+    transform: translateY(-10px); /* 滑鼠移過去微微浮起 */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08); /* 增加高級陰影 */
+}
+
+.signature-img-wrapper {
+    width: 100%;
+    height: 250px;
+    overflow: hidden; /* 確保圖片放大時不會超出框框 */
+    margin-bottom: 25px;
+    border-radius: 2px;
+}
+
+.signature-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+/* 圖片放大的互動效果 */
+.signature-card:hover .signature-img-wrapper img {
+    transform: scale(1.08);
+}
+
+.signature-card h3 {
+    font-size: 1.6rem;
+    color: var(--stamp-red);
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.signature-card p {
+    color: #555;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    text-align: justify; /* 讓文字左右貼齊，看起來像雜誌排版 */
+    text-justify: inter-ideograph;
+}
+
+/* 典藏菜單展覽區 (深色背景與畫框) */
+.full-menu-section {
+    background-color: var(--ink-black); /* 用墨黑底色襯托菜單 */
+}
+
+.full-menu-grid {
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+/* 藝術畫框特效 */
+.menu-frame {
+    flex: 1;
+    max-width: 520px;
+    background: var(--paper-white);
+    padding: 15px;
+    border: 2px solid var(--gold-accent);
+    /* 這裡創造出高級的立體錯位陰影 */
+    box-shadow: 12px 12px 0px rgba(194, 168, 120, 0.4); 
+    transition: transform 0.3s ease;
+}
+
+.menu-frame:hover {
+    transform: translate(-5px, -5px); /* 滑鼠移上去時，畫框往左上角浮動 */
+    box-shadow: 17px 17px 0px rgba(194, 168, 120, 0.4); 
+}
+
+.menu-frame img {
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+}
+
+
+
+
+/* =========================================
+   「常見問題」專屬樣式
+========================================= */
+
+.faq-container {
+    max-width: 900px; /* 讓文字區塊不要過寬，閱讀體驗更好 */
+    margin: 0 auto;
+}
+
+.faq-category {
+    margin-bottom: 60px;
+}
+
+.category-title {
+    font-size: 1.8rem;
+    color: var(--ink-black);
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--gold-accent);
+    padding-bottom: 15px;
+}
+
+/* 隱藏瀏覽器預設的三角形箭頭 */
+details > summary {
+    list-style: none;
+}
+details > summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item {
+    background: #FFF;
+    border: 1px solid #EAEAEA;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    overflow: hidden;
+}
+
+/* 問題區塊 (Summary) */
+.faq-item summary {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ink-black);
+    padding: 20px 25px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.faq-item summary:hover {
+    color: var(--stamp-red);
+    background-color: #FAFAFA;
+}
+
+/* 自訂的右側加號/減號圖示 */
+.faq-item summary::after {
+    content: '+';
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--gold-accent);
+    transition: transform 0.3s ease;
+}
+
+/* 當折疊面板打開時的狀態 */
+.faq-item[open] summary {
+    border-bottom: 1px dashed var(--gold-accent);
+    color: var(--stamp-red);
+}
+
+.faq-item[open] summary::after {
+    content: '−';
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* 答案區塊 */
+.faq-answer {
+    padding: 25px;
+    background-color: var(--paper-white);
+}
+
+.faq-answer p {
+    margin: 0;
+    color: #444;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    padding-left: 20px;
+    border-left: 3px solid var(--stamp-red); /* 答案左側的質感紅線 */
+}
+
+
+/* =========================================
+   「交通資訊」專屬樣式
+========================================= */
+
+/* 雙欄排版設定 */
+.traffic-grid {
+    display: flex;
+    gap: 70px;
+    align-items: flex-start;
+}
+
+.traffic-info-col {
+    flex: 1; /* 左側文字區塊 */
+}
+
+.traffic-map-col {
+    flex: 1; /* 右側地圖區塊 */
+    position: sticky; /* 神奇語法：讓地圖在網頁往下滑動時，會黏在畫面上跟著走 */
+    top: 120px; 
+}
+
+/* 文字資訊群組 */
+.info-group {
+    margin-bottom: 45px;
+}
+
+.info-group h3 {
+    font-size: 1.4rem;
+    color: var(--stamp-red);
+    margin-bottom: 15px;
+    border-bottom: 1px dashed var(--gold-accent); /* 金色虛線底線 */
+    padding-bottom: 8px;
+    display: inline-block;
+}
+
+.info-group p {
+    font-size: 1.1rem;
+    color: var(--ink-black);
+    line-height: 1.8;
+}
+
+/* 路線解說卡片 */
+.route-box {
+    background-color: #FFF;
+    border-left: 4px solid var(--gold-accent); /* 左側的金色粗線點綴 */
+    padding: 25px;
+    margin-top: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03); /* 微微浮起的陰影 */
+    border-radius: 2px;
+}
+
+.route-box h4 {
+    font-size: 1.2rem;
+    color: var(--ink-black);
+    margin-bottom: 10px;
+    font-weight: 900;
+}
+
+.route-box p {
+    font-size: 1.05rem;
+    color: #555;
+    margin: 0;
+}
+
+/* 地圖的畫框特效 (沿用典藏菜單的立體錯位特效) */
+.map-frame {
+    width: 100%;
+    height: 450px; /* 控制地圖高度 */
+    background: var(--paper-white);
+    padding: 12px;
+    border: 2px solid var(--ink-black);
+    box-shadow: 12px 12px 0px rgba(194, 168, 120, 0.4); /* 金色立體陰影 */
+    margin-bottom: 30px;
+}
+
+.map-frame iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* 停車場照片樣式 */
+.parking-photo img {
+    width: 100%;
+    border-radius: 2px;
+    border: 1px solid var(--gold-accent);
+    margin-top: 20px;
+}
+
+
+
+/* =========================================
+   「聯絡我們」專屬樣式
+========================================= */
+
+.contact-grid {
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+}
+
+.contact-info-col {
+    flex: 1.2;
+}
+
+.contact-line-col {
+    flex: 1;
+}
+
+/* 營業資訊列表 */
+.contact-list {
+    list-style: none;
+    margin-bottom: 40px;
+}
+
+.contact-list li {
+    margin-bottom: 25px;
+}
+
+.contact-list strong {
+    font-size: 1.2rem;
+    color: var(--ink-black);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.contact-list p {
+    font-size: 1.1rem;
+    color: #444;
+    padding-left: 30px; /* 讓內文稍微內縮，層次更分明 */
+    margin: 0;
+}
+
+.phone-link {
+    color: var(--stamp-red);
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+}
+
+.phone-link:hover {
+    text-decoration: underline;
+}
+
+.highlight-text {
+    color: var(--stamp-red);
+    font-weight: 700;
+}
+
+/* 訂位須知告示牌 (復古木質/紙張感) */
+.notice-board {
+    background-color: #F0EDE8;
+    border: 1px solid var(--gold-accent);
+    padding: 30px;
+    border-radius: 4px;
+    box-shadow: 6px 6px 0px rgba(194, 168, 120, 0.2);
+}
+
+.notice-title {
+    font-size: 1.4rem;
+    color: var(--ink-black);
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 1px solid #D2C7B4;
+    padding-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.notice-board ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.notice-board li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+    color: #444;
+}
+
+.notice-board li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--stamp-red);
+    font-weight: bold;
+}
+
+/* LINE 數位客服專區 */
+.line-service-box {
+    background-color: #FFF;
+    border: 2px solid #EAEAEA;
+    padding: 50px 40px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* QR Code 畫框 */
+.qr-code-frame {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px dashed var(--gold-accent);
+    background-color: #FFF;
+}
+
+.qr-code-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 一鍵加入 LINE 按鈕 (使用 LINE 官方經典綠色) */
+.btn-line {
+    display: inline-block;
+    background-color: #06C755;
+    color: #FFF;
+    padding: 15px 40px;
+    border-radius: 50px; /* 圓角按鈕更具親和力 */
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 15px rgba(6, 199, 85, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-line:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(6, 199, 85, 0.4);
+    color: #FFF;
+}
+
+
+
+
+/* =========================================
+   「首頁四重奏」專屬樣式
+========================================= */
+
+/* 最新消息區塊 (極簡線條風) */
+.news-section {
+    background-color: var(--paper-white);
+}
+
+.news-list {
+    list-style: none;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.news-list li {
+    display: flex;
+    align-items: center;
+    padding: 25px 15px;
+    border-bottom: 1px solid #D2C7B4; /* 淡淡的古典線條 */
+    transition: background-color 0.3s ease;
+}
+
+.news-list li:hover {
+    background-color: rgba(0,0,0,0.02);
+}
+
+.news-date {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.1rem;
+    color: var(--stamp-red);
+    font-weight: 700;
+    width: 140px; /* 固定日期寬度，讓右邊文字對齊 */
+    flex-shrink: 0;
+    letter-spacing: 1px;
+}
+
+.news-text {
+    font-size: 1.15rem;
+    color: var(--ink-black);
+    line-height: 1.6;
+}
+
+/* 手機版最新消息調整 */
+@media (max-width: 768px) {
+    .news-list li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .news-date {
+        margin-bottom: 10px;
+    }
+}
+
+/* 左右交錯的通用網格 (用於第三、四區塊) */
+.split-grid {
+    display: flex;
+    align-items: center;
+    gap: 0; /* 用 padding 控制間距 */
+}
+
+/* 反向網格 (圖片在左，文字在右) */
+.reverse-grid {
+    flex-direction: row-reverse;
+}
+
+.split-text {
+    flex: 1;
+}
+
+.split-text p {
+    font-size: 1.15rem;
+    color: #444;
+    margin-bottom: 25px;
+    text-align: justify;
+    line-height: 1.9;
+    letter-spacing: 1px;
+}
+
+.pr-50 { padding-right: 80px; }
+.pl-50 { padding-left: 80px; }
+
+.split-img {
+    flex: 1.2; /* 讓圖片略寬，增加視覺震撼 */
+}
+
+.split-img img {
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+}
+
+/* 特殊錯位陰影：右下角 (第三區塊用) */
+.shadow-right {
+    box-shadow: 15px 15px 0px rgba(183, 28, 28, 0.05); 
+}
+
+/* 特殊錯位陰影：左下角 (第四區塊用) */
+.shadow-left {
+    box-shadow: -15px 15px 0px rgba(194, 168, 120, 0.2); /* 換成淡淡的金色錯位 */
+}
