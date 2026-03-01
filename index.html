@@ -49,18 +49,9 @@
                 <h2 class="oriental-title">最新消息<span class="stamp">快報</span></h2>
             </div>
             
-            <ul class="news-list">
-                <li>
-                    <span class="news-date">2026.03.01</span>
-                    <span class="news-text">官方網站正式上線，提供更完整的線上資訊與菜單瀏覽。</span>
-                </li>
-                <li>
-                    <span class="news-date">2026.02.15</span>
-                    <span class="news-text">平日及假日 17:00 後用餐皆須預訂，歡迎多加利用 LINE 官方帳號。</span>
-                </li>
-                <li>
-                    <span class="news-date">2025.08.21</span>
-                    <span class="news-text">狂賀！本店榮獲米其林必比登推介，感謝舊雨新知支持。</span>
+            <ul class="news-list" id="news-data">
+                <li style="justify-content: center; color: #888;">
+                    正在為您讀取最新鮮的店內資訊...
                 </li>
             </ul>
             
@@ -105,5 +96,54 @@
         </div>
     </footer>
 
+
+    <script>
+        // 這裡放你剛剛拿到的專屬 Google Sheets CSV 網址
+        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR4nCifbhdpE2MJk0YUK6_lB9W2T47EYb3U0hctT6PjY65waCa1KQVF7VgS3_dVZIsbrglbAIS4JcBD/pub?output=csv';
+
+        // 抓取網頁上準備用來放最新消息的那個容器
+        const newsContainer = document.getElementById('news-data');
+
+        // 使用 fetch API 自動去雲端抓資料
+        fetch(csvUrl)
+            .then(response => response.text()) // 把抓回來的東西轉成文字
+            .then(data => {
+                // 把資料按「換行」切開，變成一行一行的陣列
+                const rows = data.split('\n');
+                
+                // 清空原本的「載入中...」文字
+                newsContainer.innerHTML = '';
+
+                // 略過第一行 (因為第一行是標題 "日期,最新消息")，從第二行開始跑迴圈
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i].trim();
+                    if (!row) continue; // 如果是空白行就跳過
+
+                    // 找出第一個逗號的位置，藉此把「日期」跟「內容」完美切開
+                    const firstComma = row.indexOf(',');
+                    const date = row.substring(0, firstComma).trim();
+                    let text = row.substring(firstComma + 1).trim();
+
+                    // 去除 Google 表格自動產生的雙引號
+                    if (text.startsWith('"') && text.endsWith('"')) {
+                        text = text.substring(1, text.length - 1);
+                    }
+
+                    // 把抓出來的資料，套用我們設計好的 HTML 衣服
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <span class="news-date">${date}</span>
+                        <span class="news-text">${text}</span>
+                    `;
+
+                    // 把做好的這條新聞，塞進網頁裡
+                    newsContainer.appendChild(listItem);
+                }
+            })
+            .catch(error => {
+                console.error('讀取資料失敗：', error);
+                newsContainer.innerHTML = '<li style="justify-content: center; color: red;">系統連線中，請稍後再試。</li>';
+            });
+    </script>
 </body>
 </html>
