@@ -1,108 +1,265 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>聯絡我們 | 劉家莊燜雞</title>
     <meta name="description" content="隱身新竹九芎湖的二十年老店，堅持在地食材與古法燜製手藝。金黃酥脆的招牌燜雞、經典客家料理，為您端上最道地的溫暖美味。">
-    <meta name="keywords" content="劉家莊燜雞, 新竹美食, 九芎湖美食, 客家菜, 甕缸雞, 烤雞, 新竹聚餐">
-    <meta name="author" content="劉家莊燜雞">
-
-    <meta property="og:title" content="劉家莊燜雞 | 傳承二十年的客家溫暖">
-    <meta property="og:description" content="金黃酥脆的招牌燜雞，傳承二十年的古法手藝。立即查看美味菜單與交通資訊！">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://M11202131.github.io/liujiazhuang-web/images/hero-chicken.jpg">
-    <meta property="og:url" content="https://M11202131.github.io/liujiazhuang-web/">
-    <meta property="og:site_name" content="劉家莊燜雞">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B4513',
+                        secondary: '#D97706',
+                        dark: '#2D241E',
+                        light: '#FDFBF7'
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-    <header>
-        <nav>
-            <a href="index.html" class="logo">
-                <img src="images/logo2.jpg" alt="劉家莊燜雞 Logo">
-            </a>
-            <ul>
-                <li><a href="index.html">首頁</a></li>
-                <li><a href="關於我們.html">關於我們</a></li>
-                <li><a href="美味菜單.html">美味菜單</a></li>
-                <li><a href="常見問題.html">常見問題</a></li>
-                <li><a href="交通.html">交通資訊</a></li>
-                <li><a href="聯絡我們.html" class="active">聯絡我們</a></li>
-            </ul>
-        </nav>
-    </header>
+<body class="antialiased selection:bg-secondary selection:text-white bg-light">
 
-    <section class="sub-hero" style="background-image: url('images/about3.jpg'); background-position: center 50%;">
-        <div class="sub-hero-content">
-            <h1 class="oriental-title" style="color: #FFF; border-bottom-color: transparent;">聯絡我們</h1>
-            <p>期待您的光臨，為您保留一席溫暖</p>
+    <!-- Navbar -->
+    <nav id="navbar" class="nav-solid fixed w-full top-0 z-50 transition-all duration-300 py-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="images/logo2.jpg" alt="劉家莊Logo"
+                        class="w-12 h-12 rounded-full object-cover border-2 border-white/20 shadow-lg">
+                    <span class="text-white text-2xl font-serif font-bold tracking-wider drop-shadow-md">劉家莊燜雞</span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">首頁</a>
+                    <a href="關於我們.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">關於我們</a>
+                    <a href="美味菜單.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">招牌美饌</a>
+                    <a href="常見問題.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">常見問題</a>
+                    <a href="交通.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">交通資訊</a>
+                    <a href="聯絡我們.html" class="text-secondary font-bold drop-shadow">聯絡我們</a>
+                    <a href="https://line.me/R/ti/p/@206vwayq" target="_blank"
+                        class="bg-secondary text-white px-6 py-2 rounded-full hover:bg-yellow-600 transition-colors font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">立即預訂</a>
+                </div>
+
+                <button id="hamburgerBtn" class="md:hidden text-white flex flex-col gap-1.5 focus:outline-none z-50">
+                    <span class="w-6 h-0.5 bg-white transition-all"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all"></span>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="absolute top-16 left-0 w-full bg-[#3E2723]/95 backdrop-blur-md shadow-xl md:hidden">
+            <div class="flex flex-col items-center py-6 gap-6">
+                <a href="index.html" class="text-white text-lg font-medium mobile-link">首頁</a>
+                <a href="關於我們.html" class="text-white text-lg font-medium mobile-link">關於我們</a>
+                <a href="美味菜單.html" class="text-white text-lg font-medium mobile-link">招牌美饌</a>
+                <a href="常見問題.html" class="text-white text-lg font-medium mobile-link">常見問題</a>
+                <a href="交通.html" class="text-white text-lg font-medium mobile-link">交通資訊</a>
+                <a href="聯絡我們.html" class="text-secondary text-lg font-bold mobile-link">聯絡我們</a>
+                <a href="https://line.me/R/ti/p/@206vwayq" target="_blank"
+                    class="bg-secondary text-white px-8 py-3 rounded-full font-semibold shadow-lg w-3/4 text-center mt-2 mobile-link">立即預訂</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sub Hero -->
+    <section class="relative h-[45vh] flex items-center justify-center mt-16 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="images/about3.jpg" alt="聯絡我們"
+                class="w-full h-full object-cover object-center transform scale-105">
+            <div class="absolute inset-0 bg-black/60"></div>
+        </div>
+        <div class="relative z-10 text-center text-white fade-in px-4">
+            <h1
+                class="text-4xl md:text-5xl font-serif font-black tracking-widest mb-4 inline-block relative border-b-4 border-transparent">
+                聯絡我們
+            </h1>
+            <p class="text-lg md:text-xl font-light tracking-widest text-white/90 mt-4">期待您的光臨，為您保留一席溫暖</p>
         </div>
     </section>
 
-    <section class="section-pad">
-        <div class="container contact-grid">
-            
-            <div class="contact-info-col">
-                <h2 class="oriental-title">營業資訊<span class="stamp">店舖</span></h2>
-                
-                <ul class="contact-list">
-                    <li>
-                        <strong>📍 營業地址</strong>
-                        <p>新竹縣新埔鎮照門里九芎湖六鄰十六之二號</p>
-                    </li>
-                    <li>
-                        <strong>📞 服務專線</strong>
-                        <p><a href="tel:035890709" class="phone-link">03-5890709</a></p>
-                    </li>
-                    <li>
-                        <strong>🕒 營業時間</strong>
-                        <p>平日：11:00 - 18:30</p>
-                        <p>假日 / 例假日：09:00 - 18:30</p>
-                        <p class="highlight-text">* 非國定假日時固定週三公休 *</p>
-                    </li>
-                </ul>
+    <!-- Contact Content -->
+    <section class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
 
-                <div class="notice-board">
-                    <h3 class="notice-title">預訂與用餐須知</h3>
-                    <ul>
-                        <li><span class="highlight-text">※ 平日及假日 17:00 後用餐，皆須預訂。</span></li>
-                        <li>假日及平日最晚入座點餐時間為 17:30。</li>
-                        <li>合菜歡迎來電預約，最晚預約時間為 17:30。</li>
-                        <li>中午不接受單點預訂，請現場候位。</li>
-                        <li>團體用餐、公家機關、旅行社、辦活動… 歡迎來電洽詢。</li>
+                <!-- Left: Info -->
+                <div class="fade-in">
+                    <h2 class="text-3xl font-serif font-bold text-dark mb-10 relative inline-block pr-12">
+                        營業資訊 <span class="stamp absolute -top-4 -right-2">店舖</span>
+                        <div class="w-full h-0.5 bg-primary/20 mt-4"></div>
+                    </h2>
+
+                    <ul class="space-y-8 mb-12">
+                        <li>
+                            <strong class="text-xl text-dark flex items-center gap-2 mb-2"><span
+                                    class="text-primary">📍</span> 營業地址</strong>
+                            <p class="text-gray-600 pl-8 text-lg">新竹縣新埔鎮照門里九芎湖六鄰十六之二號</p>
+                        </li>
+                        <li>
+                            <strong class="text-xl text-dark flex items-center gap-2 mb-2"><span
+                                    class="text-primary">📞</span> 服務專線</strong>
+                            <p class="pl-8 text-xl font-bold"><a href="tel:035890709"
+                                    class="text-primary hover:text-secondary transition-colors">03-5890709</a></p>
+                            <div class="pl-8 flex gap-4 mt-4">
+                                <a href="https://line.me/R/ti/p/@206vwayq" target="_blank"
+                                    class="w-10 h-10 rounded-full bg-[#06C755] flex items-center justify-center hover:scale-110 transition-transform text-white font-bold"
+                                    title="加入 LINE">L</a>
+                                <a href="https://www.facebook.com/profile.php?id=100066683381810" target="_blank"
+                                    class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:scale-110 transition-transform text-white font-bold"
+                                    title="Facebook">f</a>
+                                <a href="https://www.instagram.com/menji.liu1995/" target="_blank"
+                                    class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 flex items-center justify-center hover:scale-110 transition-transform text-white font-bold leading-none"
+                                    title="Instagram">IG</a>
+                            </div>
+                        </li>
+                        <li>
+                            <strong class="text-xl text-dark flex items-center gap-2 mb-2"><span
+                                    class="text-primary">🕒</span> 營業時間</strong>
+                            <div class="pl-8 space-y-1 text-gray-600">
+                                <p>平日：11:00 - 18:30</p>
+                                <p>假日 / 例假日：09:00 - 18:30</p>
+                                <p class="text-primary font-bold mt-2 text-sm">* 非國定假日時固定週三公休 *</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- Notice Board -->
+                    <div
+                        class="bg-[#FDFBF7] border border-[#C2A878] p-8 rounded-lg shadow-[6px_6px_0px_rgba(194,168,120,0.2)]">
+                        <h3
+                            class="text-xl text-dark font-bold text-center border-b border-[#D2C7B4] pb-4 mb-6 tracking-widest">
+                            預訂與用餐須知</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex gap-3"><span class="text-primary font-bold">●</span> <span
+                                    class="text-primary font-bold">平日及假日 17:00 後用餐，皆須預訂。</span></li>
+                            <li class="flex gap-3"><span class="text-primary font-bold">●</span> 假日及平日最晚入座點餐時間為 17:30。
+                            </li>
+                            <li class="flex gap-3"><span class="text-primary font-bold">●</span> 合菜歡迎來電預約，最晚預約時間為 17:30。
+                            </li>
+                            <li class="flex gap-3"><span class="text-primary font-bold">●</span> 假日中午不接受單點預訂，請現場候位。</li>
+                            <li class="flex gap-3"><span class="text-primary font-bold">●</span> 團體用餐、公家機關、旅行社、辦活動…
+                                歡迎來電洽詢。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right: LINE Box -->
+                <div class="fade-in lg:mt-8">
+                    <div
+                        class="bg-white border-2 border-[#EAEAEA] p-10 md:p-14 rounded-2xl shadow-xl text-center transform hover:-translate-y-2 transition-transform duration-500">
+                        <h2 class="text-3xl font-serif font-bold text-dark mb-4 inline-block relative">
+                            線上預約 <span class="stamp absolute -top-4 -right-8">客服</span>
+                        </h2>
+                        <p class="text-gray-500 mb-10 tracking-widest">加入官方 LINE，隨時掌握最新消息與預約訂位</p>
+
+                        <div
+                            class="w-56 h-56 mx-auto bg-white border-2 border-dashed border-[#C2A878] p-4 rounded-xl shadow-inner mb-6 flex items-center justify-center">
+                            <img src="images/line_icon.jpg" alt="LINE 官方帳號 QR Code"
+                                class="max-w-full max-h-full object-contain">
+                        </div>
+
+                        <p class="text-xl font-bold tracking-wider text-dark mb-8">ID: @206vwayq</p>
+
+                        <a href="https://line.me/R/ti/p/@206vwayq" target="_blank"
+                            class="inline-flex items-center gap-3 bg-[#06C755] hover:bg-[#05b34b] text-white px-8 py-4 rounded-full font-bold tracking-widest transition-all duration-300 shadow-[0_10px_20px_rgba(6,199,85,0.3)] hover:shadow-[0_15px_25px_rgba(6,199,85,0.4)]">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.12.298.077.767.037 1.077l-.173 1.041c-.053.316-.251 1.258 1.103.687 1.354-.57 7.306-4.305 9.71-7.164 1.487-1.745 2.23-3.69 2.23-5.841z" />
+                            </svg>
+                            一鍵加入 LINE 好友
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-20 pb-10 border-t-8 border-primary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div>
+                    <a href="index.html" class="flex items-center gap-3 mb-6">
+                        <img src="images/logo2.jpg" alt="Logo" class="w-10 h-10 rounded-full">
+                        <span class="text-2xl font-serif font-bold">劉家莊燜雞</span>
+                    </a>
+                    <p class="text-gray-400 leading-relaxed max-w-[260px]">位處九芎湖秘境，傳承二十年客家傳統手藝。為每一位尋香而來的旅人，端上一桌暖心的家鄉味。
+                    </p>
+                </div>
+
+                <div class="md:justify-self-center">
+                    <h4 class="text-lg font-bold mb-6 text-amber-500">快速連結</h4>
+                    <ul class="space-y-4">
+                        <li><a href="關於我們.html" class="text-gray-400 hover:text-white transition-colors">關於我們</a></li>
+                        <li><a href="美味菜單.html" class="text-gray-400 hover:text-white transition-colors">美味菜單</a></li>
+                        <li><a href="常見問題.html" class="text-gray-400 hover:text-white transition-colors">常見問題</a></li>
+                        <li><a href="交通.html" class="text-gray-400 hover:text-white transition-colors">交通資訊</a></li>
                     </ul>
                 </div>
-            </div>
 
-            <div class="contact-line-col">
-                <div class="line-service-box">
-                    <h2 class="oriental-title text-center" style="display: block; font-size: 2rem;">線上預約<span class="stamp">客服</span></h2>
-                    <p class="text-center" style="margin-bottom: 30px; color: #555;">加入官方 LINE，隨時掌握最新消息與預約訂位</p>
-                    
-                    <div class="qr-code-frame">
-                        <img src="images/line_icon.jpg" alt="劉家莊燜雞 LINE 官方帳號 QR Code">
-                    </div>
-                    
-                    <p class="text-center" style="font-size: 1.2rem; font-weight: bold; margin: 20px 0;">ID: @206vwayq</p>
-                    
-                    <div class="text-center">
-                        <a href="https://line.me/R/ti/p/@206vwayq" target="_blank" class="btn-line">一鍵加入 LINE 好友</a>
+                <div class="md:justify-self-end">
+                    <h4 class="text-lg font-bold mb-6 text-amber-500">聯絡我們</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <span class="text-primary">📌</span> 新竹縣新埔鎮照門里九芎湖16-2號
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-primary">📞</span> <a href="tel:03-5890709"
+                                class="hover:text-white transition-colors">03-5890709</a>
+                        </li>
+                    </ul>
+                    <div class="mt-8 flex gap-4">
+                        <a href="https://line.me/R/ti/p/@206vwayq" target="_blank"
+                            class="w-10 h-10 rounded-full bg-[#06C755] flex items-center justify-center hover:scale-110 transition-transform text-white font-bold"
+                            title="加入 LINE">L</a>
+                        <a href="https://www.facebook.com/profile.php?id=100066683381810" target="_blank"
+                            class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:scale-110 transition-transform text-white font-bold"
+                            title="Facebook">f</a>
+                        <a href="https://www.instagram.com/menji.liu1995/" target="_blank"
+                            class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 flex items-center justify-center hover:scale-110 transition-transform text-white font-bold leading-none"
+                            title="Instagram">IG</a>
                     </div>
                 </div>
             </div>
 
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>新竹縣新埔鎮照門里九芎湖16-2號 ｜ 訂位專線：03-5890709</p>
-            <p style="font-size: 0.9rem; margin-top: 30px; opacity: 0.5;">© 2026 劉家莊燜雞 All Rights Reserved.</p>
+            <div class="border-t border-gray-800 pt-8 mt-12 text-center text-gray-500 text-sm">
+                <p>&copy; 2026 劉家莊燜雞 All Rights Reserved.</p>
+            </div>
         </div>
     </footer>
 
+    <script>
+        // Mobile Menu Logic
+        document.getElementById('hamburgerBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        });
+
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
 </body>
+
 </html>

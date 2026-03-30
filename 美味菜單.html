@@ -1,106 +1,288 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>美味菜單 | 劉家莊燜雞</title>
     <meta name="description" content="隱身新竹九芎湖的二十年老店，堅持在地食材與古法燜製手藝。金黃酥脆的招牌燜雞、經典客家料理，為您端上最道地的溫暖美味。">
-    <meta name="keywords" content="劉家莊燜雞, 新竹美食, 九芎湖美食, 客家菜, 甕缸雞, 烤雞, 新竹聚餐">
-    <meta name="author" content="劉家莊燜雞">
-
-    <meta property="og:title" content="劉家莊燜雞 | 傳承二十年的客家溫暖">
-    <meta property="og:description" content="金黃酥脆的招牌燜雞，傳承二十年的古法手藝。立即查看美味菜單與交通資訊！">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://M11202131.github.io/liujiazhuang-web/images/hero-chicken.jpg">
-    <meta property="og:url" content="https://M11202131.github.io/liujiazhuang-web/">
-    <meta property="og:site_name" content="劉家莊燜雞">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B4513',
+                        secondary: '#D97706',
+                        dark: '#2D241E',
+                        light: '#FDFBF7'
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-    <header>
-        <nav>
-            <a href="index.html" class="logo">
-                <img src="images/logo2.jpg" alt="劉家莊燜雞 Logo">
-            </a>
-            <ul>
-                <li><a href="index.html">首頁</a></li>
-                <li><a href="關於我們.html">關於我們</a></li>
-                <li><a href="美味菜單.html" class="active">美味菜單</a></li>
-                <li><a href="常見問題.html">常見問題</a></li>
-                <li><a href="交通.html">交通資訊</a></li>
-                <li><a href="聯絡我們.html">聯絡我們</a></li>
-            </ul>
-        </nav>
-    </header>
+<body class="antialiased selection:bg-secondary selection:text-white bg-light">
 
-    <section class="sub-hero" style="background-image: url('images/dish-chicken.jpg'); background-position: center 50%;">
-        <div class="sub-hero-content">
-            <h1 class="oriental-title" style="color: #FFF; border-bottom-color: transparent;">美味菜單</h1>
-            <p>山林裡的煙火氣，客家灶頭的真功夫</p>
+    <!-- Navbar -->
+    <nav id="navbar" class="nav-solid fixed w-full top-0 z-50 transition-all duration-300 py-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="images/logo2.jpg" alt="劉家莊Logo"
+                        class="w-12 h-12 rounded-full object-cover border-2 border-white/20 shadow-lg">
+                    <span class="text-white text-2xl font-serif font-bold tracking-wider drop-shadow-md">劉家莊燜雞</span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">首頁</a>
+                    <a href="關於我們.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">關於我們</a>
+                    <a href="美味菜單.html" class="text-secondary font-bold drop-shadow">招牌美饌</a>
+                    <a href="常見問題.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">常見問題</a>
+                    <a href="交通.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">交通資訊</a>
+                    <a href="聯絡我們.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">聯絡我們</a>
+                    <a href="https://line.me/R/ti/p/@206vwayq" target="_blank"
+                        class="bg-secondary text-white px-6 py-2 rounded-full hover:bg-yellow-600 transition-colors font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">立即預訂</a>
+                </div>
+
+                <button id="hamburgerBtn" class="md:hidden text-white flex flex-col gap-1.5 focus:outline-none z-50">
+                    <span class="w-6 h-0.5 bg-white transition-all"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all"></span>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="absolute top-16 left-0 w-full bg-[#3E2723]/95 backdrop-blur-md shadow-xl md:hidden">
+            <div class="flex flex-col items-center py-6 gap-6">
+                <a href="index.html" class="text-white text-lg font-medium mobile-link">首頁</a>
+                <a href="關於我們.html" class="text-white text-lg font-medium mobile-link">關於我們</a>
+                <a href="美味菜單.html" class="text-secondary text-lg font-bold mobile-link">招牌美饌</a>
+                <a href="常見問題.html" class="text-white text-lg font-medium mobile-link">常見問題</a>
+                <a href="交通.html" class="text-white text-lg font-medium mobile-link">交通資訊</a>
+                <a href="聯絡我們.html" class="text-white text-lg font-medium mobile-link">聯絡我們</a>
+                <a href="https://line.me/R/ti/p/@206vwayq" target="_blank"
+                    class="bg-secondary text-white px-8 py-3 rounded-full font-semibold shadow-lg w-3/4 text-center mt-2 mobile-link">立即預訂</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sub Hero -->
+    <section class="relative h-[45vh] flex items-center justify-center mt-16 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="images/menu-hero.jpg" alt="美味菜單"
+                class="w-full h-full object-cover object-center transform scale-105">
+            <div class="absolute inset-0 bg-black/60"></div>
+        </div>
+        <div class="relative z-10 text-center text-white fade-in px-4">
+            <h1
+                class="text-4xl md:text-5xl font-serif font-black tracking-widest mb-4 inline-block relative border-b-4 border-transparent">
+                美味菜單
+            </h1>
+            <p class="text-lg md:text-xl font-light tracking-widest text-white/90 mt-4">山林裡的煙火氣，客家灶頭的真功夫</p>
         </div>
     </section>
 
-    <section class="section-pad">
-        <div class="container">
-            <div class="text-center" style="margin-bottom: 70px;">
-                <h2 class="oriental-title">招牌美饌<span class="stamp">必點</span></h2>
-                <p style="color: #666; font-size: 1.2rem; letter-spacing: 2px;">傳承二十年的火候藝術，每一口都是歲月的沉澱</p>
+    <!-- Signature Dishes -->
+    <section class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-serif font-bold text-dark inline-block relative">
+                    招牌美饌 <span class="stamp absolute -top-4 -right-12">必點</span>
+                </h2>
+                <div class="w-16 h-1 bg-primary mx-auto mt-4 rounded-full mb-6"></div>
+                <p class="text-gray-500 font-medium tracking-widest text-lg">傳承二十年的火候藝術，每一口都是歲月的沉澱</p>
             </div>
-            
-            <div class="signature-grid">
-                <div class="signature-card">
-                    <div class="signature-img-wrapper">
-                        <img src="images/dish-chicken.jpg" alt="招牌燜雞">
+
+            <div class="grid md:grid-cols-3 gap-10">
+                <div
+                    class="bg-white rounded-2xl overflow-hidden hover-lift fade-in border border-[#EFECE3] shadow-lg group">
+                    <div class="h-64 overflow-hidden relative">
+                        <div
+                            class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                        </div>
+                        <img src="images/dish-chicken.jpg" alt="招牌燜雞"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     </div>
-                    <h3>招牌燜雞</h3>
-                    <p>獨家秘方古法燜製，金黃酥脆的外皮鎖住滿滿的鮮甜肉汁，肉質鮮嫩不柴，是來店絕不能錯過的靈魂招牌。</p>
+                    <div class="p-8 text-center bg-white relative z-20">
+                        <h3 class="text-2xl font-serif font-bold text-primary mb-4 drop-shadow-sm tracking-wide">招牌燜雞
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed text-justify">
+                            獨家秘方古法燜製，金黃酥脆的外皮鎖住滿滿的鮮甜肉汁，肉質鮮嫩不柴，是來店絕不能錯過的靈魂招牌。</p>
+                    </div>
                 </div>
 
-                <div class="signature-card">
-                    <div class="signature-img-wrapper">
-                        <img src="images/dish-bamboo.jpg" alt="客家燜筍">
+                <div class="bg-white rounded-2xl overflow-hidden hover-lift fade-in border border-[#EFECE3] shadow-lg group"
+                    style="transition-delay: 0.1s;">
+                    <div class="h-64 overflow-hidden relative">
+                        <div
+                            class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                        </div>
+                        <img src="images/dish-bamboo.jpg" alt="客家燜筍"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     </div>
-                    <h3>客家燜筍</h3>
-                    <p>嚴選在地鮮脆竹筍，吸附濃郁高湯精華，口感清甜爽脆，完美平衡了味蕾，帶來最純粹的家常好滋味。</p>
+                    <div class="p-8 text-center bg-white relative z-20">
+                        <h3 class="text-2xl font-serif font-bold text-primary mb-4 drop-shadow-sm tracking-wide">客家燜筍
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed text-justify">
+                            嚴選在地鮮脆竹筍，吸附濃郁高湯精華，口感清甜爽脆，完美平衡了味蕾，帶來最純粹的家常好滋味。</p>
+                    </div>
                 </div>
 
-                <div class="signature-card">
-                    <div class="signature-img-wrapper">
-                        <img src="images/dish-tofu.jpg" alt="香酥豆腐捲">
+                <div class="bg-white rounded-2xl overflow-hidden hover-lift fade-in border border-[#EFECE3] shadow-lg group"
+                    style="transition-delay: 0.2s;">
+                    <div class="h-64 overflow-hidden relative">
+                        <div
+                            class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                        </div>
+                        <img src="images/dish-tofu.jpg" alt="香酥豆腐捲"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     </div>
-                    <h3>香酥豆腐捲</h3>
-                    <p>金黃酥脆的外層，包裹著滑嫩細緻的豆腐與豐富內餡，外酥內軟的層次口感，是大人小孩都喜愛的經典客家小吃。</p>
+                    <div class="p-8 text-center bg-white relative z-20">
+                        <h3 class="text-2xl font-serif font-bold text-primary mb-4 drop-shadow-sm tracking-wide">香酥豆腐捲
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed text-justify">
+                            金黃酥脆的外層，包裹著滑嫩細緻的豆腐與豐富內餡，外酥內軟的層次口感，是大人小孩都喜愛的經典客家小吃。</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-pad full-menu-section">
-        <div class="container text-center">
-            <h2 class="oriental-title" style="color: #FFF; border-bottom-color: var(--gold-accent);">典藏菜單<span class="stamp" style="border-color: var(--gold-accent); color: var(--gold-accent);">饗宴</span></h2>
-            <p style="color: #CCC; font-size: 1.1rem; margin-bottom: 20px;">合菜歡迎來電預約｜中午不接受單點預訂，請現場候位</p>
-            
-            <div class="full-menu-grid">
-                <div class="menu-frame">
-                    <img src="images/menu1.jpg" alt="合菜菜單">
+    <!-- Full Menu Exhibition -->
+    <section class="py-32 bg-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2
+                    class="text-4xl font-serif font-bold text-white inline-block relative border-b border-[#C2A878] pb-4 px-8">
+                    典藏菜單 <span class="stamp absolute top-0 -right-8 !text-[#C2A878] !border-[#C2A878]">饗宴</span>
+                </h2>
+                <p class="text-gray-400 mt-6 tracking-widest">合菜歡迎來電預約｜中午不接受單點預訂，請現場候位</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-20 max-w-5xl mx-auto items-start">
+                <div class="fade-in group">
+                    <div
+                        class="bg-white p-3 border-2 border-[#C2A878] shadow-[15px_15px_0px_rgba(194,168,120,0.3)] group-hover:shadow-[20px_20px_0px_rgba(194,168,120,0.4)] group-hover:-translate-y-2 group-hover:-translate-x-2 transition-all duration-300">
+                        <img src="images/menu1.jpg" alt="合菜菜單" class="w-full object-cover border border-gray-100">
+                    </div>
+                    <h3 class="text-center text-[#C2A878] text-xl font-bold mt-8 tracking-widest">團膳合菜</h3>
                 </div>
-                <div class="menu-frame">
-                    <img src="images/menu2.jpg" alt="單點菜單">
+
+                <div class="fade-in group" style="transition-delay: 0.2s;">
+                    <div
+                        class="bg-white p-3 border-2 border-[#C2A878] shadow-[15px_15px_0px_rgba(194,168,120,0.3)] group-hover:shadow-[20px_20px_0px_rgba(194,168,120,0.4)] group-hover:-translate-y-2 group-hover:-translate-x-2 transition-all duration-300">
+                        <img src="images/menu2.jpg" alt="單點菜單" class="w-full object-cover border border-gray-100">
+                    </div>
+                    <h3 class="text-center text-[#C2A878] text-xl font-bold mt-8 tracking-widest">美味單點</h3>
+                </div>
+
+                <!-- 母親節菜單 -->
+                <div class="fade-in group" style="transition-delay: 0.3s;">
+                    <div
+                        class="bg-white p-3 border-2 border-[#C2A878] shadow-[15px_15px_0px_rgba(194,168,120,0.3)] group-hover:shadow-[20px_20px_0px_rgba(194,168,120,0.4)] group-hover:-translate-y-2 group-hover:-translate-x-2 transition-all duration-300 flex items-center justify-center">
+                        <img src="images/mothers-day-1.jpg" alt="母親節特餐"
+                            class="w-full object-contain border border-gray-100">
+                    </div>
+                    <h3 class="text-center text-[#C2A878] text-xl font-bold mt-8 tracking-widest">母親節特餐</h3>
+                </div>
+
+                <div class="fade-in group" style="transition-delay: 0.4s;">
+                    <div
+                        class="bg-white p-3 border-2 border-[#C2A878] shadow-[15px_15px_0px_rgba(194,168,120,0.3)] group-hover:shadow-[20px_20px_0px_rgba(194,168,120,0.4)] group-hover:-translate-y-2 group-hover:-translate-x-2 transition-all duration-300 flex items-center justify-center">
+                        <img src="images/mothers-day-2.jpg" alt="母親節訂席注意事項"
+                            class="w-full object-contain border border-gray-100">
+                    </div>
+                    <h3 class="text-center text-[#C2A878] text-xl font-bold mt-8 tracking-widest">母親節訂席注意事項</h3>
                 </div>
             </div>
-            
-            <a href="tel:035890709" class="btn-outline" style="color: #FFF; border-color: var(--gold-accent); margin-top: 60px;">立即來電預約</a>
+
+            <div class="text-center mt-24 fade-in">
+                <a href="tel:03-5890709"
+                    class="inline-block border-2 border-[#C2A878] text-[#C2A878] hover:bg-[#C2A878] hover:text-white px-10 py-4 rounded-full font-bold tracking-widest transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">立即來電預約</a>
+            </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p>新竹縣新埔鎮照門里九芎湖16-2號 ｜ 訂位專線：03-5890709</p>
-            <p style="font-size: 0.9rem; margin-top: 30px; opacity: 0.5;">© 2026 劉家莊燜雞 All Rights Reserved.</p>
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-20 pb-10 border-t-8 border-primary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div>
+                    <a href="index.html" class="flex items-center gap-3 mb-6">
+                        <img src="images/logo2.jpg" alt="Logo" class="w-10 h-10 rounded-full">
+                        <span class="text-2xl font-serif font-bold">劉家莊燜雞</span>
+                    </a>
+                    <p class="text-gray-400 leading-relaxed max-w-[260px]">位處九芎湖秘境，傳承二十年客家傳統手藝。為每一位尋香而來的旅人，端上一桌暖心的家鄉味。
+                    </p>
+                </div>
+
+                <div class="md:justify-self-center">
+                    <h4 class="text-lg font-bold mb-6 text-amber-500">快速連結</h4>
+                    <ul class="space-y-4">
+                        <li><a href="關於我們.html" class="text-gray-400 hover:text-white transition-colors">關於我們</a></li>
+                        <li><a href="美味菜單.html" class="text-white hover:text-white transition-colors">美味菜單</a></li>
+                        <li><a href="常見問題.html" class="text-gray-400 hover:text-white transition-colors">常見問題</a></li>
+                        <li><a href="交通.html" class="text-gray-400 hover:text-white transition-colors">交通資訊</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:justify-self-end">
+                    <h4 class="text-lg font-bold mb-6 text-amber-500">聯絡我們</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <span class="text-primary">📌</span> 新竹縣新埔鎮照門里九芎湖16-2號
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-primary">📞</span> <a href="tel:03-5890709"
+                                class="hover:text-white transition-colors">03-5890709</a>
+                        </li>
+                    </ul>
+                    <div class="mt-8 flex gap-4">
+                        <a href="https://line.me/R/ti/p/@206vwayq" target="_blank"
+                            class="w-10 h-10 rounded-full bg-[#06C755] flex items-center justify-center hover:scale-110 transition-transform text-white font-bold"
+                            title="加入 LINE">L</a>
+                        <a href="https://www.facebook.com/profile.php?id=100066683381810" target="_blank"
+                            class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:scale-110 transition-transform text-white font-bold"
+                            title="Facebook">f</a>
+                        <a href="https://www.instagram.com/menji.liu1995/" target="_blank"
+                            class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 flex items-center justify-center hover:scale-110 transition-transform text-white font-bold leading-none"
+                            title="Instagram">IG</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 mt-12 text-center text-gray-500 text-sm">
+                <p>&copy; 2026 劉家莊燜雞 All Rights Reserved.</p>
+            </div>
         </div>
     </footer>
 
+    <script>
+        // Mobile Menu Logic
+        document.getElementById('hamburgerBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        });
+
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
 </body>
+
 </html>

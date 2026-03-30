@@ -1,139 +1,318 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>常見問題 | 劉家莊燜雞</title>
     <meta name="description" content="隱身新竹九芎湖的二十年老店，堅持在地食材與古法燜製手藝。金黃酥脆的招牌燜雞、經典客家料理，為您端上最道地的溫暖美味。">
-    <meta name="keywords" content="劉家莊燜雞, 新竹美食, 九芎湖美食, 客家菜, 甕缸雞, 烤雞, 新竹聚餐">
-    <meta name="author" content="劉家莊燜雞">
-
-    <meta property="og:title" content="劉家莊燜雞 | 傳承二十年的客家溫暖">
-    <meta property="og:description" content="金黃酥脆的招牌燜雞，傳承二十年的古法手藝。立即查看美味菜單與交通資訊！">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://M11202131.github.io/liujiazhuang-web/images/hero-chicken.jpg">
-    <meta property="og:url" content="https://M11202131.github.io/liujiazhuang-web/">
-    <meta property="og:site_name" content="劉家莊燜雞">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B4513',
+                        secondary: '#D97706',
+                        dark: '#2D241E',
+                        light: '#FDFBF7'
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* FAQ Dropdown Customizations */
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
 </head>
-<body>
 
-    <header>
-        <nav>
-            <a href="index.html" class="logo">
-                <img src="images/logo2.jpg" alt="劉家莊燜雞 Logo">
-            </a>
-            <ul>
-                <li><a href="index.html">首頁</a></li>
-                <li><a href="關於我們.html">關於我們</a></li>
-                <li><a href="美味菜單.html">美味菜單</a></li>
-                <li><a href="常見問題.html" class="active">常見問題</a></li>
-                <li><a href="交通.html">交通資訊</a></li>
-                <li><a href="聯絡我們.html">聯絡我們</a></li>
-            </ul>
-        </nav>
-    </header>
+<body class="antialiased selection:bg-secondary selection:text-white bg-light">
 
-    <section class="sub-hero" style="background-image: url('images/dish-bamboo.jpg'); background-position: center 60%;">
-        <div class="sub-hero-content">
-            <h1 class="oriental-title" style="color: #FFF; border-bottom-color: transparent;">常見問題</h1>
-            <p>為您解答每一個關於美味的細節</p>
+    <!-- Navbar -->
+    <nav id="navbar" class="nav-solid fixed w-full top-0 z-50 transition-all duration-300 py-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="images/logo2.jpg" alt="劉家莊Logo"
+                        class="w-12 h-12 rounded-full object-cover border-2 border-white/20 shadow-lg">
+                    <span class="text-white text-2xl font-serif font-bold tracking-wider drop-shadow-md">劉家莊燜雞</span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">首頁</a>
+                    <a href="關於我們.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">關於我們</a>
+                    <a href="美味菜單.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">招牌美饌</a>
+                    <a href="常見問題.html" class="text-secondary font-bold drop-shadow">常見問題</a>
+                    <a href="交通.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">交通資訊</a>
+                    <a href="聯絡我們.html"
+                        class="text-white hover:text-secondary transition-colors font-medium drop-shadow">聯絡我們</a>
+                    <a href="https://line.me/R/ti/p/@206vwayq" target="_blank"
+                        class="bg-secondary text-white px-6 py-2 rounded-full hover:bg-yellow-600 transition-colors font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">立即預訂</a>
+                </div>
+
+                <button id="hamburgerBtn" class="md:hidden text-white flex flex-col gap-1.5 focus:outline-none z-50">
+                    <span class="w-6 h-0.5 bg-white transition-all"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all"></span>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="absolute top-16 left-0 w-full bg-[#3E2723]/95 backdrop-blur-md shadow-xl md:hidden">
+            <div class="flex flex-col items-center py-6 gap-6">
+                <a href="index.html" class="text-white text-lg font-medium mobile-link">首頁</a>
+                <a href="關於我們.html" class="text-white text-lg font-medium mobile-link">關於我們</a>
+                <a href="美味菜單.html" class="text-white text-lg font-medium mobile-link">招牌美饌</a>
+                <a href="常見問題.html" class="text-secondary text-lg font-bold mobile-link">常見問題</a>
+                <a href="交通.html" class="text-white text-lg font-medium mobile-link">交通資訊</a>
+                <a href="聯絡我們.html" class="text-white text-lg font-medium mobile-link">聯絡我們</a>
+                <a href="https://line.me/R/ti/p/@206vwayq" target="_blank"
+                    class="bg-secondary text-white px-8 py-3 rounded-full font-semibold shadow-lg w-3/4 text-center mt-2 mobile-link">立即預訂</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sub Hero -->
+    <section class="relative h-[45vh] flex items-center justify-center mt-16 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="images/dish-bamboo.jpg" alt="常見問題"
+                class="w-full h-full object-cover object-center transform scale-105">
+            <div class="absolute inset-0 bg-black/60"></div>
+        </div>
+        <div class="relative z-10 text-center text-white fade-in px-4">
+            <h1
+                class="text-4xl md:text-5xl font-serif font-black tracking-widest mb-4 inline-block relative border-b-4 border-transparent">
+                常見問題
+            </h1>
+            <p class="text-lg md:text-xl font-light tracking-widest text-white/90 mt-4">為您解答每一個關於美味的細節</p>
         </div>
     </section>
 
-    <section class="section-pad">
-        <div class="container faq-container">
-            
-            <div class="faq-category">
-                <h2 class="category-title"><span class="stamp">內用</span> 用餐與訂位須知</h2>
-                
-                <details class="faq-item">
-                    <summary>請問內用有低消嗎？</summary>
-                    <div class="faq-answer">
-                        <p>除了包廂之外，其他位置沒有低消限制。為提供更完善的服務，內用將另收取 10% 服務費。</p>
-                    </div>
-                </details>
+    <!-- FAQ Section -->
+    <section class="py-24 bg-white relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                <details class="faq-item">
-                    <summary>請問有提供素食嗎？</summary>
-                    <div class="faq-answer">
-                        <p>有的，我們提供個人素食套餐（每客 450 元）。套餐內容包含純蔬菜、燉飯，份量固定，讓素食朋友也能享受美好的聚餐時光。</p>
-                    </div>
-                </details>
+            <!-- Category 1 -->
+            <div class="mb-16 fade-in">
+                <h2
+                    class="text-2xl font-serif font-bold text-dark border-b border-[#C2A878] pb-4 mb-8 inline-block pr-10 relative">
+                    <span class="stamp absolute -top-4 -right-4">內用</span> 用餐與訂位須知
+                </h2>
+                <div class="space-y-4">
+                    <details class="group bg-white border border-[#EAEAEA] rounded-lg shadow-sm overflow-hidden open:border-primary/30 transition-all duration-300">
+                        <summary class="text-lg font-bold text-dark p-5 cursor-pointer flex justify-between items-center group-hover:bg-[#FAFAFA] group-hover:text-primary transition-colors">
+                            關於預訂與點餐方式的說明
+                            <span class="text-[#C2A878] text-2xl group-open:rotate-45 transition-transform duration-300">+</span>
+                        </summary>
+                        <div class="p-6 bg-light text-gray-600 border-t border-dashed border-[#C2A878]/30">
+                            <div class="border-l-4 border-primary pl-4 py-1 space-y-2">
+                                <p><strong>【午餐時段】</strong>：假日 全面供應「合菜套餐」，無單點服務，平日不限。</p>
+                                <p><strong>【晚間時段】</strong>：平日、假日 最後點餐時間皆為 17：30 PM。</p>
+                                <p>建議您提前規劃行程，以便我們為您預留最舒適的座位與經典餐點。</p>
+                            </div>
+                        </div>
+                    </details>
 
-                <details class="faq-item">
-                    <summary>請問寵物可以內用嗎？</summary>
-                    <div class="faq-answer">
-                        <p>非常歡迎！但為了維護所有顧客的用餐品質，需請您使用寵物籠或推車；若為大型犬，請務必繫好牽繩。</p>
-                    </div>
-                </details>
+                    <details class="group bg-white border border-[#EAEAEA] rounded-lg shadow-sm overflow-hidden open:border-primary/30 transition-all duration-300">
+                        <summary class="text-lg font-bold text-dark p-5 cursor-pointer flex justify-between items-center group-hover:bg-[#FAFAFA] group-hover:text-primary transition-colors">
+                            請問一桌最多坐幾人？
+                            <span class="text-[#C2A878] text-2xl group-open:rotate-45 transition-transform duration-300">+</span>
+                        </summary>
+                        <div class="p-6 bg-light text-gray-600 border-t border-dashed border-[#C2A878]/30">
+                            <div class="border-l-4 border-primary pl-4 py-1 leading-relaxed">
+                                本餐廳主要提供 10 人大圓桌。<br>考量用餐時的伸展空間與舒適度，若單桌超過 10 人，建議拆分為兩桌。預約時請告知總人數，我們將為您安排相鄰的桌位。
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="group bg-white border border-[#EAEAEA] rounded-lg shadow-sm overflow-hidden open:border-primary/30 transition-all duration-300">
+                        <summary class="text-lg font-bold text-dark p-5 cursor-pointer flex justify-between items-center group-hover:bg-[#FAFAFA] group-hover:text-primary transition-colors">
+                            請問內用有收服務費嗎？
+                            <span class="text-[#C2A878] text-2xl group-open:rotate-45 transition-transform duration-300">+</span>
+                        </summary>
+                        <div class="p-6 bg-light text-gray-600 border-t border-dashed border-[#C2A878]/30">
+                            <div class="border-l-4 border-primary pl-4 py-1">
+                                本店不收服務費，全店採自助式，餐具、打包請自理。
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="group bg-white border border-[#EAEAEA] rounded-lg shadow-sm overflow-hidden open:border-primary/30 transition-all duration-300">
+                        <summary class="text-lg font-bold text-dark p-5 cursor-pointer flex justify-between items-center group-hover:bg-[#FAFAFA] group-hover:text-primary transition-colors">
+                            請問有提供素食嗎？
+                            <span class="text-[#C2A878] text-2xl group-open:rotate-45 transition-transform duration-300">+</span>
+                        </summary>
+                        <div class="p-6 bg-light text-gray-600 border-t border-dashed border-[#C2A878]/30">
+                            <div class="border-l-4 border-primary pl-4 py-1">
+                                有的，我們提供個人素食套餐（每客 400 元）。廚師每日將依據當日精選食材彈性設計菜單。為了確保能為您提供完整的用餐體驗，建議您提前預約。
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="group bg-white border border-[#EAEAEA] rounded-lg shadow-sm overflow-hidden open:border-primary/30 transition-all duration-300">
+                        <summary class="text-lg font-bold text-dark p-5 cursor-pointer flex justify-between items-center group-hover:bg-[#FAFAFA] group-hover:text-primary transition-colors">
+                            請問寵物可以內用嗎？
+                            <span class="text-[#C2A878] text-2xl group-open:rotate-45 transition-transform duration-300">+</span>
+                        </summary>
+                        <div class="p-6 bg-light text-gray-600 border-t border-dashed border-[#C2A878]/30">
+                            <div class="border-l-4 border-primary pl-4 py-1">
+                                非常歡迎！但為了維護所有顧客的用餐品質，需請您使用寵物籠或推車；若為大型犬，請務必繫好牽繩。
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="group bg-white border border-[#EAEAEA] rounded-lg shadow-sm overflow-hidden open:border-primary/30 transition-all duration-300">
+                        <summary class="text-lg font-bold text-dark p-5 cursor-pointer flex justify-between items-center group-hover:bg-[#FAFAFA] group-hover:text-primary transition-colors">
+                            自行攜帶酒水或慶祝蛋糕的費用說明？
+                            <span class="text-[#C2A878] text-2xl group-open:rotate-45 transition-transform duration-300">+</span>
+                        </summary>
+                        <div class="p-6 bg-light text-gray-600 border-t border-dashed border-[#C2A878]/30">
+                            <div class="border-l-4 border-primary pl-4 py-1 leading-relaxed">
+                                本餐廳歡迎貴賓攜帶酒水與慶祝蛋糕。<br>惟服務後續場地清潔及垃圾處理，現場將酌收 <span class="text-red-600 font-medium">清潔費 100 元 / 桌</span>。
+                            </div>
+                        </div>
+                    </details>
+                </div>
             </div>
 
-            <div class="faq-category">
-                <h2 class="category-title"><span class="stamp">外帶</span> 外帶與宅配服務</h2>
-                
-                <details class="faq-item">
-                    <summary>請問可以外帶嗎？</summary>
-                    <div class="faq-answer">
-                        <p>我們提供外帶服務，菜單上的所有餐點皆可為您打包外帶。</p>
-                    </div>
-                </details>
+            <!-- Category 2 -->
+            <div class="mb-16 fade-in">
+                <h2
+                    class="text-2xl font-serif font-bold text-dark border-b border-[#C2A878] pb-4 mb-8 inline-block pr-10 relative">
+                    <span class="stamp absolute -top-4 -right-4">外帶</span> 外帶與宅配服務
+                </h2>
+                <div class="space-y-4">
+                    <details class="group bg-white border border-[#EAEAEA] rounded-lg shadow-sm overflow-hidden open:border-primary/30 transition-all duration-300">
+                        <summary class="text-lg font-bold text-dark p-5 cursor-pointer flex justify-between items-center group-hover:bg-[#FAFAFA] group-hover:text-primary transition-colors">
+                            請問可以外帶嗎？
+                            <span class="text-[#C2A878] text-2xl group-open:rotate-45 transition-transform duration-300">+</span>
+                        </summary>
+                        <div class="p-6 bg-light text-gray-600 border-t border-dashed border-[#C2A878]/30">
+                            <div class="border-l-4 border-primary pl-4 py-1">
+                                我們提供外帶服務，菜單上的所有餐點皆可為您打包外帶。
+                            </div>
+                        </div>
+                    </details>
 
-                <details class="faq-item">
-                    <summary>外帶會用什麼包裝呢？需自備鍋子嗎？</summary>
-                    <div class="faq-answer">
-                        <p>外帶餐點皆使用耐熱鋁箔盤盛裝，方便您安全攜帶。同時，我們也非常鼓勵並歡迎您自備環保容器來盛裝美食。</p>
-                    </div>
-                </details>
+                    <details class="group bg-white border border-[#EAEAEA] rounded-lg shadow-sm overflow-hidden open:border-primary/30 transition-all duration-300">
+                        <summary class="text-lg font-bold text-dark p-5 cursor-pointer flex justify-between items-center group-hover:bg-[#FAFAFA] group-hover:text-primary transition-colors">
+                            外帶會用什麼包裝呢？需自備鍋子嗎？
+                            <span class="text-[#C2A878] text-2xl group-open:rotate-45 transition-transform duration-300">+</span>
+                        </summary>
+                        <div class="p-6 bg-light text-gray-600 border-t border-dashed border-[#C2A878]/30">
+                            <div class="border-l-4 border-primary pl-4 py-1 leading-relaxed">
+                                外帶餐點主要使用專用外帶餐盒或耐熱鋁箔盤盛裝，方便您安全攜帶，精華湯品因容積較大且需防漏，我們會使用食品級耐熱袋妥善包裝。同時，我們也非常鼓勵並歡迎您自備環保容器來盛裝美食。
+                            </div>
+                        </div>
+                    </details>
 
-                <details class="faq-item">
-                    <summary>請問有外送服務嗎？</summary>
-                    <div class="faq-answer">
-                        <p>目前餐廳暫未提供外送服務，歡迎您親自來店外帶或內用。</p>
-                    </div>
-                </details>
-
-                <details class="faq-item">
-                    <summary>請問有提供宅配嗎？</summary>
-                    <div class="faq-answer">
-                        <p>有的！我們的招牌燜雞新鮮現烤後，會採用真空包裝鎖住美味，並依數量為您提供低溫宅配服務。</p>
-                    </div>
-                </details>
+                    <details class="group bg-white border border-[#EAEAEA] rounded-lg shadow-sm overflow-hidden open:border-primary/30 transition-all duration-300">
+                        <summary class="text-lg font-bold text-dark p-5 cursor-pointer flex justify-between items-center group-hover:bg-[#FAFAFA] group-hover:text-primary transition-colors">
+                            請問有提供宅配嗎？
+                            <span class="text-[#C2A878] text-2xl group-open:rotate-45 transition-transform duration-300">+</span>
+                        </summary>
+                        <div class="p-6 bg-light text-gray-600 border-t border-dashed border-[#C2A878]/30">
+                            <div class="border-l-4 border-primary pl-4 py-1">
+                                美味值得等待，宅配服務正在努力籌備中，敬請期待！
+                            </div>
+                        </div>
+                    </details>
+                </div>
             </div>
 
-            <div class="faq-category">
-                <h2 class="category-title"><span class="stamp">賞味</span> 保存與加熱方式</h2>
-                
-                <details class="faq-item">
-                    <summary>吃不完打包的餐點可以放幾天？</summary>
-                    <div class="faq-answer">
-                        <p>我們的餐點皆為當天新鮮現做，絕無添加任何防腐劑。建議您將打包餐點冷藏保存，並於「次日」食用完畢以確保最佳風味與衛生。</p>
-                    </div>
-                </details>
-
-                <details class="faq-item">
-                    <summary>打包的燜雞沒有吃完怎麼加熱？</summary>
-                    <div class="faq-answer">
-                        <p>建議您參考我們隨附的官方加熱說明，您可以使用「烤箱」烘烤以恢復外皮酥脆，或使用「電鍋」加熱以保持肉質濕潤。</p>
-                    </div>
-                </details>
-            </div>
-
-            <div class="text-center" style="margin-top: 80px;">
-                <p style="color: #666; margin-bottom: 20px;">還有其他疑問嗎？歡迎隨時與我們聯繫</p>
-                <a href="聯絡我們.html" class="btn-outline">前往聯絡我們</a>
+            <div class="text-center mt-20 fade-in">
+                <p class="text-gray-500 mb-6 text-lg tracking-widest">還有其他疑問嗎？歡迎隨時與我們聯繫</p>
+                <a href="聯絡我們.html"
+                    class="inline-block border-2 border-primary text-primary hover:bg-primary hover:text-white px-10 py-4 rounded-full font-bold tracking-widest transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1">前往聯絡我們</a>
             </div>
 
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p>新竹縣新埔鎮照門里九芎湖16-2號 ｜ 訂位專線：03-5890709</p>
-            <p style="font-size: 0.9rem; margin-top: 30px; opacity: 0.5;">© 2026 劉家莊燜雞 All Rights Reserved.</p>
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-20 pb-10 border-t-8 border-primary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div>
+                    <a href="index.html" class="flex items-center gap-3 mb-6">
+                        <img src="images/logo2.jpg" alt="Logo" class="w-10 h-10 rounded-full">
+                        <span class="text-2xl font-serif font-bold">劉家莊燜雞</span>
+                    </a>
+                    <p class="text-gray-400 leading-relaxed max-w-[260px]">位處九芎湖秘境，傳承二十年客家傳統手藝。為每一位尋香而來的旅人，端上一桌暖心的家鄉味。
+                    </p>
+                </div>
+
+                <div class="md:justify-self-center">
+                    <h4 class="text-lg font-bold mb-6 text-amber-500">快速連結</h4>
+                    <ul class="space-y-4">
+                        <li><a href="關於我們.html" class="text-gray-400 hover:text-white transition-colors">關於我們</a></li>
+                        <li><a href="美味菜單.html" class="text-gray-400 hover:text-white transition-colors">美味菜單</a></li>
+                        <li><a href="常見問題.html" class="text-white hover:text-white transition-colors">常見問題</a></li>
+                        <li><a href="交通.html" class="text-gray-400 hover:text-white transition-colors">交通資訊</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:justify-self-end">
+                    <h4 class="text-lg font-bold mb-6 text-amber-500">聯絡我們</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <span class="text-primary">📌</span> 新竹縣新埔鎮照門里九芎湖16-2號
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-primary">📞</span> <a href="tel:03-5890709"
+                                class="hover:text-white transition-colors">03-5890709</a>
+                        </li>
+                    </ul>
+                    <div class="mt-8 flex gap-4">
+                        <a href="https://line.me/R/ti/p/@206vwayq" target="_blank"
+                            class="w-10 h-10 rounded-full bg-[#06C755] flex items-center justify-center hover:scale-110 transition-transform text-white font-bold"
+                            title="加入 LINE">L</a>
+                        <a href="https://www.facebook.com/profile.php?id=100066683381810" target="_blank"
+                            class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:scale-110 transition-transform text-white font-bold"
+                            title="Facebook">f</a>
+                        <a href="https://www.instagram.com/menji.liu1995/" target="_blank"
+                            class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 flex items-center justify-center hover:scale-110 transition-transform text-white font-bold leading-none"
+                            title="Instagram">IG</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 mt-12 text-center text-gray-500 text-sm">
+                <p>&copy; 2026 劉家莊燜雞 All Rights Reserved.</p>
+            </div>
         </div>
     </footer>
 
+    <script>
+        // Mobile Menu Logic
+        document.getElementById('hamburgerBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        });
+
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
 </body>
+
 </html>
